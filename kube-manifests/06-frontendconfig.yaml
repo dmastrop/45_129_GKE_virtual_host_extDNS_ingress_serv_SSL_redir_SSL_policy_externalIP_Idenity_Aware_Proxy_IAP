@@ -1,0 +1,13 @@
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: my-frontend-config
+spec:
+# this is the http to https redirect for the SSL setup
+  redirectToHttps:
+    enabled: true
+    #responseCodeName: RESPONSE_CODE
+  # SSL Policy
+  sslPolicy: gke-ingress-ssl-policy 
+  # gcloud compute ssl-policies create gke-ingress-ssl-policy --profile MODERN --min-tls-version 1.0  
+  # https://cloud.google.com/load-balancing/docs/use-ssl-policies#gcloud   
