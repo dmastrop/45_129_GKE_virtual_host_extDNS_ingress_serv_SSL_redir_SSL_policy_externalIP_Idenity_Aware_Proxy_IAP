@@ -1,13 +1,23 @@
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
-# NOTE this backend config must be applied to the NodePort services in all 3 apps via annotations
+# this is a custom resource
+# NOTE this backend config must be applied to the NodePort services in all 3 apps (yamls) via annotations
+# this backend is referenced by the NodePort service just like the frontend config was referenced by the ingress service yaml.
 metadata:
   name: my-backendconfig
 spec:
   iap:
+  # identity aware proxy
     enabled: true
     oauthclientCredentials:
-      secretName: my-secret    
+      secretName: my-secret 
+      # this kubectl secret was created from the Client ID and Client secret that we generated for the app in IAP 
+      # kubectl create secret generic my-secret --from-literal=client_id=client_id_key \
+      #--from-literal=client_secret=client_secret_key
+      # once created, k8s has access to this and it can be accessed through this backend yaml.
+      # this will essentially identify the backend app to the google IAP server when the IAP needs to autenticate and authorize
+      # a user for access to this app.
+  
 
 # sampleRate: Specify a value from 0.0 through 1.0, where 0.0 means no packets are logged 
 # and 1.0 means 100% of packets are logged. This field is only relevant if enable is set 

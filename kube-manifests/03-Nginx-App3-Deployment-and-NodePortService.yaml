@@ -36,6 +36,8 @@ metadata:
   labels:
     app: app3-nginx
   annotations:
+    cloud.google.com/backend-config: '{"default": "my-backendconfig"}'  
+    # this references the backend config in backendconfig.yaml by name "my-backendconfig"   
 spec:
   type: NodePort
   selector:

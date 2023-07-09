@@ -36,6 +36,14 @@ metadata:
   labels:
     app: app1-nginx
   annotations:
+    cloud.google.com/backend-config: '{"default": "my-backendconfig"}'
+    # this references the backend config in backendconfig.yaml by name "my-backendconfig"  
+    # https://cloud.google.com/iap/docs/enabling-kubernetes-howto 
+    # "You also need to associate Service ports with your BackendConfig to trigger turning on IAP. 
+    #  One way to make this association is to make all ports for the service default to your BackendConfig, 
+    # which you can do by adding the following annotation to your Service resource:""
+    # use "default" so that all ports will references the my-backendconfig
+    # if you want to do only certain ports : https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-configuration
 spec:
   type: NodePort
   selector:

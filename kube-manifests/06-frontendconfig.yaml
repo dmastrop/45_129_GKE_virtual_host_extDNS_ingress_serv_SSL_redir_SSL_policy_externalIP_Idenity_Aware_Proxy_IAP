@@ -1,5 +1,6 @@
 apiVersion: networking.gke.io/v1beta1
 kind: FrontendConfig
+# this is referenced from the ingress service yaml. (and in like fashion the backend yaml will be referenced from the NodePort service)
 metadata:
   name: my-frontend-config
 spec:
